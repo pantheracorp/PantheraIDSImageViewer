@@ -1,5 +1,4 @@
 function fetchServerData(src, moduleId) {
-
     if (moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
         setimgarryTest(src);
     }

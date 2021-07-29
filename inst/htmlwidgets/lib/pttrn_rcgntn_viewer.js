@@ -4,12 +4,14 @@
       @Copyright (C) 2019 | Panthera Corporation
      ***************************************************************************/
 
+   console.log("version - 3");
    var findflag = false;
    var slctd_imgs_clone = [];
    var whichviewer;
    var nextprev = "0";
 
    function objectof(viewerType) {
+     console.log("in objectOf()");
      whichviewer = viewerType;
    }
 
@@ -24,6 +26,22 @@
    function nextprevclicked(status) {
      nextprev = status;
    }
+
+
+
+   /*
+   
+   var clickStatus = "0";
+   function getCurrClckdImg(state, imgsrc)
+   {
+     console.log("In getCurrClckdImg");
+     Shiny.onInputChange(state,imgsrc);
+   }
+
+   function clickEventStatus(status)
+   {
+     clickStatus = status;
+   }*/
 
    function arrayclone(param) {
      slctd_imgs_clone = [...param];
@@ -1802,6 +1820,8 @@
         */
        view: function view() {
 
+         console.log("In view()");
+
          this.update();
          var _this = this;
 
@@ -1811,14 +1831,17 @@
          if (!this.isShown) {
 
            if (nextprev === "1") {
+             console.log("Line 1824 returns");
              nextprev = "0";
              return;
            }
            if (findflag === true) {
+             console.log("I am hidding the image");
              findflag = false;
              return this.hide();
            }
 
+           console.log("Return this.show()");
            this.index = index;
            return this.show();
          }
@@ -1843,16 +1866,43 @@
          image.src = url;
          image.alt = alt;
 
+         console.log("Image URL : " + image.src);
+
+
          if (whichviewer === "pttrn_rcgntn_vwr") {
+           console.log("In whichviewer : pttrn_rcgntn_vwr");
            if (pttrn_rcgntn_obj.getSelectedImages().includes(url) || pttrn_rcgntn_obj.removedRef() === url) {
              if (pttrn_rcgntn_obj.getSelectedImages().includes(url) || slctd_imgs_clone.includes(url)) {
                this.image = image;
+               console.log("Um hidding the clicked image");
                this.hide();
+               //resetwhichViewer();
                return;
              }
            }
          }
 
+
+         if (whichviewer === "pttrn_rcgntn_vwr") {
+           console.log(" Which Viewer : pttrn_rcgntn_vwr");
+           // getCurrClckdImg("clssfctn_vw_curr_img",
+           //     url.substring(url.lastIndexOf("/") + 1, url.length ));
+           //resetwhichViewer();
+         }
+         /*else if(whichviewer === "imgIdentification")
+         {
+           console.log(" Which Viewer : imgIdentification");
+           getCurrClckdImg("spcs_idntfctn_id_rf_1_vw_curr_img",
+              url.substring(url.lastIndexOf("/") + 1, url.length ));
+              //resetwhichViewer();
+         }
+         else if (whichviewer === "imgIdentification_rf2")
+         {
+            console.log(" Which Viewer : imgIdentification_rf2");
+            getCurrClckdImg("spcs_idntfctn_id_rf_2_vw_curr_img",
+            url.substring(url.lastIndexOf("/") + 1,url.length ));
+
+         }*/
 
          if (isFunction(options.view)) {
            addListener(element, EVENT_VIEW, options.view, {

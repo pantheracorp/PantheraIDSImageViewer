@@ -16,6 +16,7 @@
    }
 
    function objectOf(viewerType) {
+     console.log("in objectOf()");
      whichViewer = viewerType;
    }
 
@@ -28,6 +29,7 @@
    }
 
    function getCurrClckdImg(state, imgsrc) {
+     console.log("In getCurrClckdImg");
      Shiny.onInputChange(state, imgsrc);
    }
 
@@ -1812,6 +1814,8 @@
         */
        view: function view() {
 
+         console.log("In view()");
+
          this.update();
          var _this = this;
 
@@ -1821,14 +1825,17 @@
          if (!this.isShown) {
 
            if (nextPrev === "1") {
+             console.log("Line 1824 returns");
              nextPrev = "0";
              return;
            }
            if (find_flag === true) {
+             console.log("I am hidding the image");
              find_flag = false;
              return this.hide();
            }
 
+           console.log("Return this.show()");
            this.index = index;
            return this.show();
          }
@@ -1853,12 +1860,17 @@
          image.src = url;
          image.alt = alt;
 
-         if (whichViewer === "imgClassification") {
+         console.log("Image URL : " + image.src);
 
+
+         if (whichViewer === "imgClassification") {
+           console.log("In whichViewer : imgClassification");
            if (imgClssfctnObj.getSelectedImages().includes(url) || imgClssfctnObj.removedRef() === url) {
              if (imgClssfctnObj.getSelectedImages().includes(url) || selected_images_clone.includes(url)) {
                this.image = image;
+               console.log("Um hidding the clicked image");
                this.hide();
+               //resetwhichViewer();
                return;
              }
            }
@@ -1866,15 +1878,17 @@
 
 
          if (whichViewer === "imgClassification") {
+           console.log(" Which Viewer : imgClassification");
            getCurrClckdImg("clssfctn_vw_curr_img",
              url.substring(url.lastIndexOf("/") + 1, url.length));
+           //resetwhichViewer();
          } else if (whichViewer === "imgIdentification") {
-
+           console.log(" Which Viewer : imgIdentification");
            getCurrClckdImg("spcs_idntfctn_id_rf_1_vw_curr_img",
              url.substring(url.lastIndexOf("/") + 1, url.length));
-
+           //resetwhichViewer();
          } else if (whichViewer === "imgIdentification_rf2") {
-
+           console.log(" Which Viewer : imgIdentification_rf2");
            getCurrClckdImg("spcs_idntfctn_id_rf_2_vw_curr_img",
              url.substring(url.lastIndexOf("/") + 1, url.length));
 

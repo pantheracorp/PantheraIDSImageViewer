@@ -1,27 +1,16 @@
  /***************************************************************************
   *   @author Valentine Tawira
   *   @description  Script for handling all the specific logic for the validation viewers.
+  *                
+  *                  
   *   Copyright (C) 2019 | Panthera Corporation
   * ***************************************************************************/
 
 
- var ct_vldt_img_trggr_tbl_vldtn_9 = new ViewerComponent(
-   0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_9"
- );
-
- var ct_vldt_img_trggr_tbl_vldtn_11 = new ViewerComponent(
-   0, 30, 5,
-   "ct_vldt_img_trggr_tbl_vldtn_11"
- );
-
- var ct_vldt_img_trggr_tbl_vldtn_10 = new ViewerComponent(
-   0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_10"
- );
-
- var ct_vldt_img_trggr_tbl_vldtn_12 = new ViewerComponent(
-   0, 30, 5,
-   "ct_vldt_img_trggr_tbl_vldtn_12"
- );
+ var ct_vldt_img_trggr_tbl_vldtn_9 = new ViewerComponent(0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_9", "ct_vldt_img_trggr_tbl_vldtn_9.csv");
+ var ct_vldt_img_trggr_tbl_vldtn_11 = new ViewerComponent(0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_11", "ct_vldt_img_trggr_tbl_vldtn_11.csv");
+ var ct_vldt_img_trggr_tbl_vldtn_10 = new ViewerComponent(0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_10", "ct_vldt_img_trggr_tbl_vldtn_10.csv");
+ var ct_vldt_img_trggr_tbl_vldtn_12 = new ViewerComponent(0, 30, 5, "ct_vldt_img_trggr_tbl_vldtn_12", "ct_vldt_img_trggr_tbl_vldtn_12.csv");
 
  /**
   * 
@@ -56,6 +45,26 @@
    object.callvjs(object.moduleId + "_divId");
  }
 
+
+ /**
+  * 
+  * @param {*} resp image names string 
+  * @param {*} vldtnNum validation viewer  
+  */
+ function setValidationArray(resp, vldtnNum) {
+   if (vldtnNum === 9) {
+     ct_vldt_img_trggr_tbl_vldtn_9.readServerData(resp);
+   }
+   if (vldtnNum === 10) {
+     ct_vldt_img_trggr_tbl_vldtn_10.readServerData(resp);
+   }
+   if (vldtnNum === 11) {
+     ct_vldt_img_trggr_tbl_vldtn_11.readServerData(resp);
+   }
+   if (vldtnNum === 12) {
+     ct_vldt_img_trggr_tbl_vldtn_12.readServerData(resp);
+   }
+ }
 
  function setValidationArrayTest(resp, vldtnNum) {
 
