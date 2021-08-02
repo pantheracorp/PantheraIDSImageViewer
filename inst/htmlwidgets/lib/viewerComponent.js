@@ -25,6 +25,8 @@ class ViewerComponent {
 
   readServerData(response) {
 
+    console.log("readServerData - 02/08/2021");
+
     let mdid = (this.moduleId).substring(0, 27);
     this.imgArray.length = 0;
     this.selectedImageID.length = 0;
@@ -387,44 +389,60 @@ class ViewerComponent {
   }
 
   selectAll() {
+
     this.selected_images.length = 0;
     this.selectedImageID.length = 0;
     let slctdimgs = [],
       tempSlctdId = [];
-    //let ulclassname = this.ulClassName();
     $('#' + this.moduleId + ' img').each(function () {
 
-      $('#' + this.id + '').css({
-        'opacity': '0.4',
-        'filter': 'alpha(opacity=40)'
-      });
-      //$('.'+ulclassname+'> li').css("background-color", "yellow");
-      $('#' + this.id + '').closest('li').css("background-color", "yellow");
-      slctdimgs.push($(this).attr('src'));
-      tempSlctdId.push($(this).attr('id'));
+      if (
+        $('#' + this.id + '').closest('li').attr('id') != 'mtchd'
+      ) {
+
+        $('#' + this.id + '').css({
+          'opacity': '0.4',
+          'filter': 'alpha(opacity=40)'
+        });
+        $('#' + this.id + '').closest('li').css("background-color", "yellow");
+        slctdimgs.push($(this).attr('src'));
+        tempSlctdId.push($(this).attr('id'));
+
+      }
 
     });
     this.selected_images = [...slctdimgs];
     this.selectedImageID = [...tempSlctdId];
     this.sendAllImages();
 
+    console.log(
+      this.selectedImageID
+    )
+
   }
 
 
   deSelectAll() {
     $('#' + this.moduleId + ' img').each(function () {
-      $('#' + this.id + '').css({
-        'opacity': '',
-        'filter': ''
-      });
 
+      if (
+        $('#' + this.id + '').closest('li').attr('id') != 'mtchd'
+      ) {
+
+        $('#' + this.id + '').css({
+          'opacity': '',
+          'filter': ''
+        });
+
+      }
     });
+
     (this.prevSelectedImgs).length = 0;
     this.prevSelectedImgs = [...this.selected_images];
     this.selected_images.length = 0;
     this.selectedImageID.length = 0;
     this.getCurrClckdImg(this.selectedImgShinyRef(), "");
-    this.highlightMatched();
+    //this.highlightMatched();
 
   }
 
