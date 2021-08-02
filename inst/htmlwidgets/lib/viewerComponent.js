@@ -442,7 +442,7 @@ class ViewerComponent {
     this.selected_images.length = 0;
     this.selectedImageID.length = 0;
     this.getCurrClckdImg(this.selectedImgShinyRef(), "");
-    //this.highlightMatched();
+    this.highlightMatched();
 
   }
 
