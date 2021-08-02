@@ -6,8 +6,6 @@ HTMLWidgets.widget({
 
   factory: function (el, width, height) {
 
-    // TODO: define shared variables for this instance
-
     return {
 
       renderValue: function (x) {
@@ -17,7 +15,6 @@ HTMLWidgets.widget({
         Shiny.addCustomMessageHandler(
           "spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button",
           function (mesg) {
-            console.log("Handler spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button");
             let src = JSON.stringify(mesg);
             console.log(src);
             nextprevclicked("1");
@@ -41,7 +38,6 @@ HTMLWidgets.widget({
         Shiny.addCustomMessageHandler(
           "pttrn_rcgntn_mtch_all_button",
           function (mesg) {
-            console.log(mesg);
             saveRejectButtonListerner();
           }
         );
@@ -54,7 +50,6 @@ HTMLWidgets.widget({
           }
         );
 
-        // New
         Shiny.addCustomMessageHandler(
           "pttrn_rcgntn_slct_all_button",
           function (mesg) {
@@ -78,7 +73,6 @@ HTMLWidgets.widget({
             pttrn_rcgntn_invrt();
           }
         );
-        // el.innerText = x.message;
       },
 
       resize: function (width, height) {
