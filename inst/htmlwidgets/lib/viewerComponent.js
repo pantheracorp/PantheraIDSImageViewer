@@ -25,8 +25,6 @@ class ViewerComponent {
 
   readServerData(response) {
 
-    console.log("readServerData - 02/08/2021");
-
     let mdid = (this.moduleId).substring(0, 27);
     this.imgArray.length = 0;
     this.selectedImageID.length = 0;
@@ -111,38 +109,7 @@ class ViewerComponent {
       this.clearImages();
       this.imgloop(this.imgArray);
     }
-
   }
-
-  /*readServerDataTest(response) {
-    let mdid = (this.moduleId).substring(0, 27);
-    this.imgArray.length = 0;
-    this.selectedImageID.length = 0;
-
-    if (response === null) {
-      console.log(" Error in reading your images");
-    } else {
-
-      this.imgArray = response.split(",");
-
-      if (this.moduleId === "img_clssfctn_ud") {
-        Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-          1 + " / " + this.getBatchNumber());
-      }
-    }
-    if (this.moduleId === "img_clssfctn_ud") {
-      this.clearImages();
-      this.imgloop(this.displayImages(this.imgNumb, 0));
-    }
-    if (this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
-      this.clearImages();
-      this.imgloop(this.imgArray);
-    }
-    if (mdid === 'ct_vldt_img_trggr_tbl_vldtn') {
-      this.clearImages();
-      this.imgloop(this.imgArray);
-    }
-  }*/
 
   ulClassName() {
 
@@ -155,7 +122,6 @@ class ViewerComponent {
   }
 
   highliter(elementID) {
-    //let ulclassname = this.ulClassName();
     $('#' + elementID + '').css({
       'opacity': '0.4',
       'filter': 'alpha(opacity=40)'
@@ -183,7 +149,6 @@ class ViewerComponent {
     });
   }
 
-  // clssfctn_slctd_img
   getCurrClckdImg(state, imgsrc) {
     Shiny.onInputChange(state, imgsrc);
   }
@@ -391,11 +356,6 @@ class ViewerComponent {
     this.selected_images = [...slctdimgs];
     this.selectedImageID = [...tempSlctdId];
     this.sendAllImages();
-
-    console.log(
-      this.selectedImageID
-    )
-
   }
 
   selectAll() {
@@ -425,11 +385,6 @@ class ViewerComponent {
     this.selected_images = [...slctdimgs];
     this.selectedImageID = [...tempSlctdId];
     this.sendAllImages();
-
-    console.log(
-      this.selectedImageID
-    )
-
   }
 
 
@@ -622,7 +577,6 @@ class ViewerComponent {
         'filter': 'alpha(opacity=40)'
       });
       $('#' + imgs[i].id + '').closest('li').css("background-color", "yellow");
-      //$('.'+ulclassname+'> li').css("background-color", "yellow");
       slctdimgs.push(imgs[i].src);
       tempSlctdId.push(imgs[i].id);
     }
@@ -647,6 +601,4 @@ class ViewerComponent {
     this.selectedImageID.length = 0;
     this.getCurrClckdImg("pttrn_rcgntn_mn_pnl_slctd_img", "");
   }
-
-
 }
