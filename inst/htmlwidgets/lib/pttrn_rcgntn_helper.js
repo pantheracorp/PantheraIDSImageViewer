@@ -19,8 +19,7 @@
 
     // pattern recognition viewer object 
     var pttrn_rcgntn_obj = new ViewerComponent(0, 50, 5,
-      'spcs_idntfctn_pttrn_rcgntn_mn_pnl',
-      'pttrn_rcgntn_fltrd_rslts.csv');
+      'spcs_idntfctn_pttrn_rcgntn_mn_pnl');
 
     /**
      * Handles all image panel click events

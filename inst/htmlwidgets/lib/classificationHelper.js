@@ -33,7 +33,7 @@ $(document).ready(function () {
 
 });
 
-var imgClssfctnObj = new ViewerComponent(0, 50, 5, "img_clssfctn_ud", "img_clssfctn_ud.csv");
+var imgClssfctnObj = new ViewerComponent(0, 50, 5, "img_clssfctn_ud");
 
 /**
  * Handles all image panel click events
