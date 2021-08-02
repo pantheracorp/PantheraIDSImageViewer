@@ -17,7 +17,7 @@ HTMLWidgets.widget({
         Shiny.addCustomMessageHandler(
           "spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button",
           function (mesg) {
-            console.log("Handler spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button 02/08/2021");
+            console.log("Handler spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button 02/08/2021 - 11:02");
             let src = JSON.stringify(mesg);
             console.log(src);
             nextprevclicked("1");
@@ -41,7 +41,6 @@ HTMLWidgets.widget({
         Shiny.addCustomMessageHandler(
           "pttrn_rcgntn_mtch_all_button",
           function (mesg) {
-            console.log(mesg);
             saveRejectButtonListerner();
           }
         );
