@@ -17,7 +17,7 @@ HTMLWidgets.widget({
         Shiny.addCustomMessageHandler(
           "spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button",
           function (mesg) {
-            console.log("Handler spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button 02/08/2021 - 11:02");
+            console.log("Handler spcs_idntfctn_pttrn_rcgntn_indvdl_fltr_button 02/08/2021 - 11:30");
             let src = JSON.stringify(mesg);
             console.log(src);
             nextprevclicked("1");

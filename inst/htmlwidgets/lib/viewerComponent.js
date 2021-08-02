@@ -372,7 +372,7 @@ class ViewerComponent {
     $('#' + this.moduleId + ' img').each(function () {
 
       if (
-        mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
+        !mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
       ) {
 
         if (ar.includes($(this).attr('src'))) {
@@ -408,7 +408,7 @@ class ViewerComponent {
     $('#' + this.moduleId + ' img').each(function () {
 
       if (
-        mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
+        !mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
       ) {
 
         $('#' + this.id + '').css({
@@ -439,7 +439,7 @@ class ViewerComponent {
     $('#' + this.moduleId + ' img').each(function () {
 
       if (
-        mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
+        !mtchStatus.includes($('#' + this.id + '').closest('li').attr('id'))
       ) {
 
         $('#' + this.id + '').css({
