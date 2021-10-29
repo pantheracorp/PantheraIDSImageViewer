@@ -54,7 +54,20 @@ HTMLWidgets.widget({
           }
         );
 
-        Shiny.addCustomMessageHandler("img_clssfctn_ud_sv_edt_button",
+
+        Shiny.addCustomMessageHandler("img_clssfctn_ud_apply_edt_button",
+          function (msg) {
+            applyButtonListerner();
+          }
+        );
+
+        Shiny.addCustomMessageHandler("img_clssfctn_ud_srvr_apply_edt_button",
+          function (msg) {
+            applyButtonListerner();
+          }
+        );
+
+        /*Shiny.addCustomMessageHandler("img_clssfctn_ud_sv_edt_button",
           function (msg) {
             saveButtonListerner();
           }
@@ -64,7 +77,7 @@ HTMLWidgets.widget({
           function (msg) {
             saveButtonListerner();
           }
-        );
+        );*/
 
         Shiny.addCustomMessageHandler("mssng_srv_imgs_handler",
           function (msg) {
