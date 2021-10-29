@@ -599,6 +599,6 @@ class ViewerComponent {
     this.prevSelectedImgs = [...this.selected_images];
     this.selected_images.length = 0;
     this.selectedImageID.length = 0;
-    this.getCurrClckdImg("pttrn_rcgntn_mn_pnl_slctd_img", "");
+    //this.getCurrClckdImg("pttrn_rcgntn_mn_pnl_slctd_img", "");
   }
 }

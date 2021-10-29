@@ -2,21 +2,6 @@
      code included inside $(document).ready() will only run once the page is
       ready for JavaScript code to execute
     ***************************************************************************/
-    /*$(document).ready(function () {
-
-        $("#pttrn_rcgntn_slct_all_button").on("click", function () {
-          pttrn_rcgntn_obj.selectAll();
-        });
-
-        $("#pttrn_rcgntn_dslct_all_button").on("click", function () {
-          pttrn_rcgntn_obj.deSelectAll();
-        });
-
-        $("#pttrn_rcgntn_invrt_button").on("click", function () {
-          pttrn_rcgntn_obj.invertSelection();
-        });
-    });*/
-
     // pattern recognition viewer object 
     var pttrn_rcgntn_obj = new ViewerComponent(0, 50, 5,
       'spcs_idntfctn_pttrn_rcgntn_mn_pnl');
@@ -84,7 +69,8 @@
 
     // save or reject helper function
     function saveRejectButtonListerner() {
-      pttrn_rcgntn_obj.matchRejectHighlighter(); //matchRejectHighlighter
+      pttrn_rcgntn_obj.matchRejectHighlighter();
+      pttrn_rcgntn_obj.this.getCurrClckdImg("pttrn_rcgntn_mn_pnl_slctd_img", "");
     }
 
     // remove all images from the panel

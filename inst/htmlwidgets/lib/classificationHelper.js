@@ -101,6 +101,17 @@ function setImageArrayTest(resp) {
   imgClssfctnObj.readServerDataTest(resp);
 }
 
+function applyButtonListerner() {
+  console.log('classificationHelper.js applyButtonListerner()');
+  imgClssfctnObj.matchRejectHighlighter();
+  imgClssfctnObj.getCurrClckdImg("clssfctn_slctd_img", "");
+  imgClssfctnObj.getCurrClckdImg("clssfctn_vw_curr_img", "");
+  // imgClssfctnObj.liWhiteBackground();
+  // imgClssfctnObj.deSelectAll();
+  // imgClssfctnObj.getCurrClckdImg("clssfctn_slctd_img", "");
+  // imgClssfctnObj.getCurrClckdImg("clssfctn_vw_curr_img", "");
+}
+
 function saveButtonListerner() {
   console.log('classificationHelper.js saveButtonListerner()');
   imgClssfctnObj.liWhiteBackground();
