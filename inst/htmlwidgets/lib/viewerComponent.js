@@ -22,6 +22,38 @@ class ViewerComponent {
     this.selectedImageID = [];
   }
 
+  flagNextPrev() {
+    if (typeof nextPrevClicked === "function") {
+      nextPrevClicked("1");
+      return;
+    }
+    if (typeof nextprevclicked === "function") {
+      nextprevclicked("1");
+      return;
+    }
+  }
+
+  setBatchTickerText(text) {
+    if (this.moduleId === "img_clssfctn_ud") {
+      Shiny.onInputChange("img_clssfctn_ud_btch_tckr", text);
+      return;
+    }
+    if (this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
+      let el = document.getElementById("pttrn_rcgntn_btch_tckr");
+      if (el) {
+        el.textContent = text;
+      }
+    }
+  }
+
+  updateBatchTicker() {
+    let batches = this.getBatchNumber();
+    if (batches === 0) {
+      this.setBatchTickerText("0 / 0");
+      return;
+    }
+    this.setBatchTickerText((this.batnum + 1) + " / " + batches);
+  }
 
   readServerData(response) {
 
@@ -46,9 +78,12 @@ class ViewerComponent {
         this.imgArray.push(src.replace(',', ''));
       }
 
-      if (this.moduleId === "img_clssfctn_ud") {
-        Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-          1 + " / " + this.getBatchNumber());
+      if (
+        this.moduleId === "img_clssfctn_ud" ||
+        this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl"
+      ) {
+        this.batnum = 0;
+        this.updateBatchTicker();
       }
     }
     if (this.moduleId === "img_clssfctn_ud") {
@@ -57,7 +92,7 @@ class ViewerComponent {
     }
     if (this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
       this.clearImages();
-      this.imgloop(this.imgArray);
+      this.imgloop(this.displayImages(this.imgNumb, 0));
     }
     if (mdid === 'ct_vldt_img_trggr_tbl_vldtn') {
       this.clearImages();
@@ -74,12 +109,27 @@ class ViewerComponent {
     if (response === null) {
       console.log(" Error in reading your images");
     } else {
+      if (this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
+        let resp = response;
+        let resp_1 = JSON.parse(resp);
+        let mtchd1 = resp_1.match;
+        let imgArray1 = resp_1.img_wrt;
+
+        this.imgArray = imgArray1;
+        this.mtchdArray = mtchd1;
+
+        this.batnum = 0;
+        this.updateBatchTicker();
+        this.clearImages();
+        this.imgloop(this.displayImages(this.imgNumb, 0));
+        return;
+      }
 
       this.imgArray = response.split(",");
 
       if (this.moduleId === "img_clssfctn_ud") {
-        Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-          1 + " / " + this.getBatchNumber());
+        this.batnum = 0;
+        this.updateBatchTicker();
       }
     }
 
@@ -88,21 +138,6 @@ class ViewerComponent {
       this.imgloop(
         this.displayImages(this.imgNumb, 0)
       );
-    }
-
-    if (this.moduleId === "spcs_idntfctn_pttrn_rcgntn_mn_pnl") {
-
-      let resp = response;
-      let resp_1 = JSON.parse(resp);
-      let mtchd1 = resp_1.match;
-      let imgArray1 = resp_1.img_wrt;
-
-      this.imgArray = imgArray1;
-      this.mtchdArray = mtchd1;
-
-      this.clearImages();
-      this.imgloop(this.imgArray);
-
     }
 
     if (mdid === 'ct_vldt_img_trggr_tbl_vldtn') {
@@ -219,6 +254,9 @@ class ViewerComponent {
   }
 
   getBatchNumber() {
+    if ((this.imgArray).length === 0) {
+      return 0;
+    }
     if ((this.imgArray.length % this.imgNumb) === 0) {
       return (this.imgArray.length / this.imgNumb);
     } else {
@@ -227,48 +265,51 @@ class ViewerComponent {
   }
   // We need a function that maps to diff modules
   next() {
-    nextPrevClicked("1");
+    this.flagNextPrev();
+
+    if (this.getBatchNumber() === 0) {
+      this.batnum = 0;
+      this.updateBatchTicker();
+      this.clearImages();
+      this.getCurrClckdImg(this.selectedImgShinyRef(), "");
+      return;
+    }
 
     if (this.batnum < this.getBatchNumber() - 1) {
       this.batnum++;
-      Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-        (this.batnum + 1) + " / " + this.getBatchNumber());
-      this.imgloop(this.displayImages(this.imgNumb, this.batnum));
-      this.selected_images.length = 0;
-      this.selectedImageID.length = 0;
-      this.getCurrClckdImg("clssfctn_slctd_img", "");
-
     } else {
-      Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-        this.getBatchNumber() + " / " + this.getBatchNumber());
-      this.imgNumb(this.displayImages(this.imgNumb, this.getBatchNumber() - 1));
       this.batnum = this.getBatchNumber() - 1;
-      this.selected_images.length = 0;
-      this.selectedImageID.length = 0;
-      this.getCurrClckdImg("clssfctn_slctd_img", "");
     }
+
+    this.updateBatchTicker();
+    this.imgloop(this.displayImages(this.imgNumb, this.batnum));
+    this.selected_images.length = 0;
+    this.selectedImageID.length = 0;
+    this.getCurrClckdImg(this.selectedImgShinyRef(), "");
   }
 
   prev() {
+    this.flagNextPrev();
 
-    nextPrevClicked("1");
-    this.batnum--;
+    if (this.getBatchNumber() === 0) {
+      this.batnum = 0;
+      this.updateBatchTicker();
+      this.clearImages();
+      this.getCurrClckdImg(this.selectedImgShinyRef(), "");
+      return;
+    }
+
     if (this.batnum > 0) {
-      Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-        (this.batnum + 1) + " / " + this.getBatchNumber());
-      this.imgloop(this.displayImages(this.imgNumb, this.batnum));
-      this.selected_images.length = 0;
-      this.selectedImageID.length = 0;
-      this.getCurrClckdImg("clssfctn_slctd_img", "");
+      this.batnum--;
     } else {
-      Shiny.onInputChange("img_clssfctn_ud_btch_tckr",
-        1 + " / " + this.getBatchNumber());
-      this.imgloop(this.displayImages(this.imgNumb, 0));
-      this.selected_images.length = 0;
-      this.selectedImageID.length = 0;
-      this.getCurrClckdImg("clssfctn_slctd_img", "");
       this.batnum = 0;
     }
+
+    this.updateBatchTicker();
+    this.imgloop(this.displayImages(this.imgNumb, this.batnum));
+    this.selected_images.length = 0;
+    this.selectedImageID.length = 0;
+    this.getCurrClckdImg(this.selectedImgShinyRef(), "");
   }
 
   trimSRC(selctdImgAry) {
@@ -472,6 +513,7 @@ class ViewerComponent {
     (this.prevSelectedImgs).length = 0;
 
     let ul = document.getElementById(this.moduleId);
+    let startIndex = this.batnum * this.imgNumb;
 
     for (let i = 0; i < arr.length; i++) {
 
@@ -485,9 +527,16 @@ class ViewerComponent {
 
       if (this.placeHolder(img.src)) {
 
+        let mtchStatus = null;
         if ((this.mtchdArray).length == arr.length) {
+          mtchStatus = this.mtchdArray[i];
+        } else if ((this.mtchdArray).length == (this.imgArray).length) {
+          mtchStatus = this.mtchdArray[startIndex + i];
+        }
 
-          if (this.mtchdArray[i] == "Unvalidated") {
+        if (mtchStatus !== null && mtchStatus !== undefined) {
+
+          if (mtchStatus == "Unvalidated") {
 
             ul.innerHTML += '<li  ><img id="' + liId + '" data-original="' + img.src + '"  marked="' + img.datamarked + '" src="' + img.src + '"onerror="' + "this.style.display='none'" + '"  alt="' + img.alt + '" /> </li>';
 
