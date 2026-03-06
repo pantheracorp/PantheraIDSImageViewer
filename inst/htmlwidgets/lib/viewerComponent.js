@@ -115,8 +115,8 @@ class ViewerComponent {
         let mtchd1 = resp_1.match;
         let imgArray1 = resp_1.img_wrt;
 
-        this.imgArray = imgArray1;
-        this.mtchdArray = mtchd1;
+        this.imgArray = Array.isArray(imgArray1) ? imgArray1 : Object.values(imgArray1 || {});
+        this.mtchdArray = Array.isArray(mtchd1) ? mtchd1 : Object.values(mtchd1 || {});
 
         this.batnum = 0;
         this.updateBatchTicker();
