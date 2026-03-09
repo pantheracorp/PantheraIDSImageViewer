@@ -1,25 +1,21 @@
 dependencies:
-- name: pttrn_rcgntn_viewer
-  version: 1.0.0
-  src: htmlwidgets
-  script: ./lib/pttrn_rcgntn_viewer.js
-- name: viewerHelpers
-  version: 1.0.0
-  src: htmlwidgets
-  script: ./lib/viewerHelpers.js
-- name: viewerComponent
-  version: 1.0.0
-  src: htmlwidgets
-  script: ./lib/viewerComponent.js
-- name: pttrn_rcgntn_helper
-  version: 1.0.0
-  src: htmlwidgets
-  script: ./lib/pttrn_rcgntn_helper.js
 - name: jquery
   version: 1.0.0
   src: htmlwidgets
   script: ./lib/jquery-3.4.1.slim.min.js
-- name: main
+- name: pttrn_rcgntn_viewer
+  version: 2.0.0
+  src: htmlwidgets
+  script: ./lib/pttrn_rcgntn_viewer.js
+- name: viewerComponent
+  version: 2.0.0
+  src: htmlwidgets
+  script: ./lib/viewerComponent.js
+- name: viewerHelpers
   version: 1.0.0
   src: htmlwidgets
-  script: ./lib/pttrn_rcgntn_main.js
+  script: ./lib/viewerHelpers.js
+- name: pttrn_rcgntn_helper
+  version: 2.0.0
+  src: htmlwidgets
+  script: ./lib/pttrn_rcgntn_helper.js
