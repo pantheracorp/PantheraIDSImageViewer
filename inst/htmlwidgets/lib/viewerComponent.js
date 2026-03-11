@@ -7,13 +7,7 @@
     Images are now loaded asynchronously with onerror fallback.
 ***************************************************************************/
 
-var PLACEHOLDER_SVG = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(
-  '<svg xmlns="http://www.w3.org/2000/svg" width="300" height="200" viewBox="0 0 300 200">' +
-    '<rect fill="#e8e8e8" width="300" height="200"/>' +
-    '<text x="150" y="90" text-anchor="middle" fill="#999" font-family="sans-serif" font-size="15">Image not found</text>' +
-    '<text x="150" y="115" text-anchor="middle" fill="#bbb" font-family="sans-serif" font-size="12">?</text>' +
-  '</svg>'
-);
+var PLACEHOLDER_IMG = 'Missing_Image.JPG';
 
 class ViewerComponent {
 
@@ -240,7 +234,7 @@ class ViewerComponent {
     var filename = src.split('/').pop();
     return (
       filename === 'PantheraIDS_image_not_found_2.jpg' ||
-      src.indexOf('data:image/svg+xml') === 0
+      filename === 'Missing_Image.JPG'
     );
   }
 
@@ -467,8 +461,8 @@ class ViewerComponent {
       img.setAttribute('data-original', src);
       img.setAttribute('marked', '0');
       img.onerror = function () {
-        if (this.src !== PLACEHOLDER_SVG) {
-          this.src = PLACEHOLDER_SVG;
+        if (this.src !== PLACEHOLDER_IMG) {
+          this.src = PLACEHOLDER_IMG;
           this.alt = 'Image not found';
         }
       };
