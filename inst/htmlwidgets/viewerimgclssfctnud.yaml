@@ -8,7 +8,7 @@ dependencies:
   src: htmlwidgets
   script: ./lib/viewerHelpers.js
 - name: viewerComponent
-  version: 1.7.0
+  version: 1.7.1
   src: htmlwidgets
   script: ./lib/viewerComponent.js
 - name: classificationHelper

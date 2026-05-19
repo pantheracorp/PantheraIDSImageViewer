@@ -290,6 +290,7 @@ class ViewerComponent {
   vjs(elementID) {
     var elementID = new Viewer(document.getElementById(elementID), {
       url: 'data-original',
+      loop: false,
       title: function (image) {
         return image.alt + ' (' + (this.index + 1) + '/' + this.length + ')';
       },
@@ -480,7 +481,7 @@ class ViewerComponent {
       img.src = ((arr[i].trim()).replace(/[\[\]'"]+/g, '')).replace(/(\r\n|\n|\r)/gm, "");
 
       this.currentDisplayedImgs.push(img.src);
-      img.alt = "Camera Trap";
+      img.alt = img.src.split('/').pop();
       img.datamarked = 0;
 
       if (this.placeHolder(img.src)) {
